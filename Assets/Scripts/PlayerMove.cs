@@ -1,54 +1,57 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] int movementspeed = 5;
 
-    private Rigidbody2D rb; // Посилання на компонент Rigidbody2D для фізичного руху
-    private Animator animator; // Посилання на компонент Animator для керування анімаціями
-    private SpriteRenderer spriteRenderer; // Посилання на компонент SpriteRenderer для керування орієнтацією спрайта (перевертання)
+
+    private Rigidbody2D rd;
+    private Animator animator;
+    public InputAction moveAction;
+    public SpriteRenderer sr;
+    public float speed = 3f;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rd = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
+        moveAction.Enable();
 
-        if (rb == null)
-        {
-            Debug.LogError("RigidBody2d is null!");
-        }
-        if (animator == null)
-        {
-            Debug.LogError("Animator is null!");
-        }
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer is null!");
-        }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float moveinput = Input.GetAxis("Horizontal") * movementspeed * Time.fixedDeltaTime;
+        Vector2 move = moveAction.ReadValue<Vector2>();
 
-        transform.Translate(new Vector3(moveinput, 0, 0));
-        //rb.linearVelocity = new Vector2(moveinput, rb.linearVelocityY);
-
+        Vector2 position = (Vector2)rd.position + move * Time.deltaTime * speed;
+        rd.MovePosition(position);
         if (animator != null)
         {
-            animator.SetBool("isRunning", moveinput != 0);
+            animator.SetBool("isRunning", move.x != 0);
         }
 
-        if (moveinput > 0)
+        if (move.x > 0)
         {
-            spriteRenderer.flipX = false;
+            Flip("right");
         }
-        else if (moveinput < 0)
+        else if (move.x < 0)
         {
-            spriteRenderer.flipX = true;
+            Flip("left");
         }
 
+    }
+    public void Flip(string direction)
+    {
+        if (direction == "right")
+        {
+            sr.flipX = false;
+        }
+        else if (direction == "left")
+        {
+            sr.flipX = true;
+        }
     }
 }
