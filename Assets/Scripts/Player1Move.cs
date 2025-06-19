@@ -1,21 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour
+public class Player1Move : MonoBehaviour
 {
 
 
-    private Rigidbody2D rd;
+    private Rigidbody2D rb;
     private Animator animator;
     public InputAction moveAction;
-    public SpriteRenderer sr;
+   
     public float speed = 3f;
 
     void Start()
     {
-        rd = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
         moveAction.Enable();
 
 
@@ -26,8 +25,11 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
 
-        Vector2 position = (Vector2)rd.position + move * Time.deltaTime * speed;
-        rd.MovePosition(position);
+        Vector2 position = rb.position + move * speed * Time.fixedDeltaTime;
+
+
+        rb.MovePosition(position);
+
         if (animator != null)
         {
             animator.SetBool("isRunning", move.x != 0);
@@ -47,11 +49,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (direction == "right")
         {
-            sr.flipX = false;
+           transform.rotation = Quaternion.Euler(0, 0, 0);
+
+
         }
         else if (direction == "left")
         {
-            sr.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 }

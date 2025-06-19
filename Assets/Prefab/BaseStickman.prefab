@@ -104,6 +104,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4330739802f824a4a98c3efe5e27906d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchAction:
+    m_Name: Punch
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8ff8151f-abb3-4004-a74f-defafb7b6195
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &1364545406051544601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745fe2a3f0e3dde4ab4b46bfae1a1988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementspeed: 5
+  moveAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b0ab8b98-b127-489f-bd89-58d2f37bb8ee
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  speed: 3
 --- !u!50 &4131781656594547414
 Rigidbody2D:
   serializedVersion: 5
