@@ -1,0 +1,11 @@
+:root {
+
+}
+
+#startButton:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#exitButton:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
