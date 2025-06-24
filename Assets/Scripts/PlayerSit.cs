@@ -21,11 +21,11 @@ public class PlayerSit : MonoBehaviour
         if (animator != null && sitAction.IsPressed())
         {
             animator.SetBool("isSitting", true);
-            StartCoroutine(ResetPunch());
+            StartCoroutine(ResetSit());
         }
     }
 
-    IEnumerator ResetPunch()
+    IEnumerator ResetSit()
     {
         yield return new WaitForSeconds(1f);
         animator.SetBool("isSitting", false);
